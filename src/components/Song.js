@@ -1,43 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import FavoriteButton from "./FavoriteButton";
 
-//This component gets the data for each item of the array via props and displays each items unique data and information.
+// Helper function to update artwork URL size.
+const getLargerArtworkUrl = (url, size = 600) => {
+  return url.replace(/\/\d+x\d+bb.jpg$/, `/${size}x${size}bb.jpg`);
+};
+
 function Song(props) {
   const song = props.song;
+  const largerArtworkUrl = getLargerArtworkUrl(song?.artworkUrl100); // Use larger image.
 
   return (
-    <div
-      className="bg-default text-primary my-3 p-3 rounded"
-      style={{ border: "solid 1px #CCC", boxShadow: "7px 7px 5px grey" }}
-    >
-      <div>
-        {/*JSX for the cards that display the data of the tracks*/}
-        <h4 className="text-white">{song?.trackName}</h4>
-        <div className="mx-1">
-          <img src={song?.artworkUrl100} alt="trackArtwork" width="50%" />
-        </div>
-        <div className="text-white">Author: {song?.artistName}</div>
-        <div className="text-white">
-          Price: {song?.trackPrice} {song?.currency}
-        </div>
-
-        <div className="songButtons mt-2">
+    <div>
+      <Link to="/preview" state={song}>
+        <div
+          className="bg-default text-primary my-3 p-3 rounded"
+          style={{ border: "solid 1px #CCC", boxShadow: "7px 7px 5px grey" }}
+        >
           <div>
-            <Link to="/preview" state={song}>
-              <button className="btn btn-md btn-outline-light">Preview</button>
-            </Link>
+            <h4 className="text-white text-center">{song?.trackName}</h4>
+            <div className="mx-1">
+              <img
+                src={largerArtworkUrl} // Use the larger image URL.
+                alt="trackArtwork"
+                width="100%"
+              />
+            </div>
+            <div className="text-white">Author: {song?.artistName}</div>
           </div>
-          <FavoriteButton
-            trackName={song?.trackName}
-            artistName={song?.artistName}
-            trackPrice={song?.trackPrice}
-            currency={song?.currency}
-            artworkUrl100={song?.artworkUrl100}
-            previewUrl={song?.previewUrl}
-          />
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

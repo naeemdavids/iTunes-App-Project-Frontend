@@ -7,12 +7,9 @@ function FavoritesDelete(props) {
 
   //We use the DELETE method to remove tracks from the user's favouries.
   const deleteButton = () => {
-    fetch(
-      "https://itunes-app-project-backend.onrender.com/favorites/" + idDelete,
-      {
-        method: "DELETE",
-      }
-    );
+    fetch("http://localhost:8080/favorites/" + idDelete, {
+      method: "DELETE",
+    });
   };
 
   return (

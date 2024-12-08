@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Song from "./Song";
 import { Link } from "react-router-dom";
 
-//This is the Home page where the users search results are displayed. The search results are sent to this component via props to display here. Here the search results are displayed in their own blocks/cards via the .map method.
 function Home(props) {
   const [musicList, setMusicList] = useState(props.songs);
   let count = props.count;
@@ -22,17 +21,15 @@ function Home(props) {
         </Link>
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridGap: "20px",
-          gridTemplateColumns: "49% 49%",
-        }}
-      >
-        {/*This map method maps through the array stored in the state. In this case the musicList*/}
-        {musicList.map((song, id) => {
-          return <Song song={song} key={id} />;
-        })}
+      <div className="row g-4">
+        {musicList.map((song, id) => (
+          <div key={id} className="col-12 col-sm-6 col-md-4">
+            <div className="song-card h-100 d-flex flex-column">
+              {/* Ensure all cards have the same height */}
+              <Song song={song} />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

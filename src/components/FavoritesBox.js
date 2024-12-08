@@ -2,37 +2,37 @@ import React from "react";
 import { Link } from "react-router-dom";
 import FavoritesDelete from "./FavoritesDelete";
 
+// Helper function to update artwork URL size.
+const getLargerArtworkUrl = (url, size = 600) => {
+  return url.replace(/\/\d+x\d+bb.jpg$/, `/${size}x${size}bb.jpg`);
+};
+
 //This component gets the data for each item of the favorites array from the FavoritesPage component via props, and displays each items unique data and information.
 function FavoritesBox(props) {
   let getFavorites = props.favorites;
-  console.log(getFavorites);
+  const largerArtworkUrl = getLargerArtworkUrl(getFavorites?.artworkUrl100); // Use larger image.
 
   return (
-    <div
-      className="bg-default text-primary my-3 p-3"
-      style={{ border: "solid 1px #CCC", boxShadow: "7px 7px 5px grey" }}
-    >
-      {/*Data from props is displayed here in jsx*/}
-      <div>
-        <h4 className="text-white">{getFavorites.trackName}</h4>
-        <div>
-          <img src={getFavorites.artworkUrl100} alt="trackArtwork" />
-        </div>
-        <div className="text-white">Author: {getFavorites.artistName}</div>
-        <div className="text-white">
-          Price: {getFavorites.trackPrice} {getFavorites.currency}
-        </div>
-      </div>
+    <div>
+      <Link to="/favoritesPreview" state={getFavorites}>
+        <div
+          className="bg-default text-primary my-3 p-3"
+          style={{ border: "solid 1px #CCC", boxShadow: "7px 7px 5px grey" }}
+        >
+          {/*Data from props is displayed here in jsx*/}
+          <div>
+            <h4 className="text-white">{getFavorites.trackName}</h4>
+            <div>
+              <img src={largerArtworkUrl} alt="trackArtwork" />
+            </div>
+            <div className="text-white">Author: {getFavorites.artistName}</div>
+          </div>
 
-      <div className="songButtons mt-2">
-        <div>
-          <Link to="/favoritesPreview" state={getFavorites}>
-            <button className="btn btn-md btn-outline-light">Preview</button>
-          </Link>
+          <div className="songButtons mt-2">
+            <FavoritesDelete idDelete={getFavorites.idDelete} />
+          </div>
         </div>
-
-        <FavoritesDelete idDelete={getFavorites.idDelete} />
-      </div>
+      </Link>
     </div>
   );
 }
