@@ -21,7 +21,7 @@ function App() {
 
   //Function for getting the data from the backend and storing it in the state.
   const getData = () => {
-    fetch("http://localhost:8080")
+    fetch("https://itunes-app-project-backend.onrender.com/")
       .then((res) => res.json())
       .then((data) => {
         setCount(data.resultCount);
@@ -38,11 +38,14 @@ function App() {
     let newSearch = { term, entity, limit };
 
     try {
-      const sendData = await fetch("http://localhost:8080", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newSearch),
-      });
+      const sendData = await fetch(
+        "https://itunes-app-project-backend.onrender.com/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newSearch),
+        }
+      );
 
       // If the Post to the backend is successfull, this code tells the state to re-render again.
       if (sendData.ok) {
