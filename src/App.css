@@ -1,19 +1,77 @@
-.searchBox{
-    height: 30%;
-    border: 1px white solid;
-    border-radius: 5px;
+/* General reset to remove any default margins/paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.resultsFoundBox{
-    justify-content: space-between;
-    align-items: center;
+/* Ensure the full viewport height is utilized */
+html,
+body {
+  height: 100%;
 }
 
-.songButtons{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Root container with flex layout */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
+/* Main content should grow and take up available space */
+.App {
+  flex: 1; /* Ensures this section expands to fill available space */
+}
 
+/* Footer styling */
+.footer {
+  margin-top: auto; /* Pushes footer to the bottom */
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  opacity: 85%;
+}
 
+/*Css for the Search Box */
+
+.searchBox {
+  height: 30%;
+  border: 1px white solid;
+  border-radius: 5px;
+}
+
+.resultsFoundBox {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.songButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*Below code is for Cards that contain the array items from the iTunes Api */
+/* Add padding and shadow for consistent styling */
+.song-card {
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 15px;
+  background: #222; /* Same card background */
+  color: #fff;
+}
+
+/* Prevent card content from overflowing */
+.song-card h4 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.song-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
