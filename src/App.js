@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import SongPreview from "./components/SongPreview";
 import FavoritesPage from "./components/FavoritesPage";
 import FavoritesPreview from "./components/FavoritesPreview";
+import Footer from "./components/Footer";
 
 function App() {
   const [songs, setSongs] = useState([]); //Stores the results from the api in the state.
@@ -20,7 +21,7 @@ function App() {
 
   //Function for getting the data from the backend and storing it in the state.
   const getData = () => {
-    fetch("https://itunes-app-project-backend.onrender.com/")
+    fetch("http://localhost:8080")
       .then((res) => res.json())
       .then((data) => {
         setCount(data.resultCount);
@@ -37,14 +38,11 @@ function App() {
     let newSearch = { term, entity, limit };
 
     try {
-      const sendData = await fetch(
-        "https://itunes-app-project-backend.onrender.com/",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newSearch),
-        }
-      );
+      const sendData = await fetch("http://localhost:8080", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newSearch),
+      });
 
       // If the Post to the backend is successfull, this code tells the state to re-render again.
       if (sendData.ok) {
@@ -62,11 +60,10 @@ function App() {
   };
 
   return (
-    <div>
+    <div id="root">
       <div className="App container bg-dark bg-opacity-75">
         <Header />
         <SearchBox searchSong={searchSong} />
-
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home songs={songs} count={count} />} />
@@ -76,6 +73,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </div>
+      <Footer />
     </div>
   );
 }
