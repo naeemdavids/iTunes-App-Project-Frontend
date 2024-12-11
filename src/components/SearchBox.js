@@ -23,46 +23,56 @@ function SearchBox(props) {
   };
 
   return (
-    <form className="searchBox text-center" onSubmit={searchHandler}>
-      <label className="text-white mx-2">Search: </label>
-      <input
-        type="text"
-        placeholder="Search"
-        onChange={(e) => setTerm(e.target.value)}
-      />
+    <form
+      className="searchBox d-flex flex-wrap justify-content-center gap-3 p-1"
+      onSubmit={searchHandler}
+    >
+      <div className="searchBox-item">
+        <label className="text-white mx-2 fw-bold fs-3">Search: </label>
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={(e) => setTerm(e.target.value)}
+        />
+      </div>
 
-      {/*Dropdown options of the menu for the type of content*/}
-      <label className="text-white mx-2">Content Type: </label>
-      <select value={entity} onChange={(e) => setEntity(e.target.value)}>
-        <option value="movie">Movie</option>
-        <option value="musicVideo">Music Video</option>
-        <option value="musicTrack">Music Audio</option>
-        <option value="podcast">Podcast</option>
-        <option value="audiobook">Audio Book</option>
-        <option value="shortFilm">Short Film</option>
-        <option value="tvSeason">TV Show(Season)</option>
-        <option value="tvEpisode">TV Show(Episode)</option>
-        <option value="software">Software</option>
-        <option value="ebook">eBook</option>
-        <option value="	movie, album, allArtist, podcast, musicVideo, mix, audiobook, tvSeason, allTrack">
-          All
-        </option>
-      </select>
+      <div className="searchBox-item">
+        <label className="text-white mx-2 fw-bold fs-3">Content Type: </label>
+        <select value={entity} onChange={(e) => setEntity(e.target.value)}>
+          <option value="movie">Movie</option>
+          <option value="musicVideo">Music Video</option>
+          <option value="musicTrack">Music Audio</option>
+          <option value="podcast">Podcast</option>
+          <option value="audiobook">Audio Book</option>
+          <option value="shortFilm">Short Film</option>
+          <option value="tvSeason">TV Show(Season)</option>
+          <option value="tvEpisode">TV Show(Episode)</option>
+          <option value="software">Software</option>
+          <option value="ebook">eBook</option>
+          <option value="	movie, album, allArtist, podcast, musicVideo, mix, audiobook, tvSeason, allTrack">
+            All
+          </option>
+        </select>
+      </div>
 
-      <label className="text-white mx-2">Limit: </label>
-      <input
-        type="number"
-        min={1}
-        max={200}
-        placeholder="10"
-        onChange={(e) => setLimit(e.target.value)}
-      />
+      <div className="searchBox-item">
+        <label className="text-white mx-2 fw-bold fs-3">Limit: </label>
+        <input
+          type="number"
+          min={1}
+          max={200}
+          placeholder="20"
+          onChange={(e) => setLimit(e.target.value)}
+        />
+      </div>
 
-      <input
-        type="submit"
-        value="Search"
-        className="btn btn-outline-light m-1"
-      />
+      <div className="searchBox-item">
+        <input
+          type="submit"
+          value="Search"
+          className="btn btn-outline-light fw-bold fs-5"
+        />
+      </div>
     </form>
   );
 }
